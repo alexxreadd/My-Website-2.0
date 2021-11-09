@@ -1,0 +1,68 @@
+---
+title: "Résumé"
+description: |
+  Alex Read's Resume
+author:
+  - name: Alex Read 
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+  
+## Education  
+### Mississippi State University, Starkville, MS
+Bachelor of Accountancy -- Completed August 2021  
+Masters of Professional Accountancy, Minor in Data Analytics -- Expected Graduation August 2022  
+  
+## Skills
+Critical Thinker | Customer and Client Focused  
+Leadership Abilities | Efficient  
+Results Driven | Property and Resident Management Programs  
+  
+## Work Experience  
+### HORNE Cyber, Ridgeland, MS
+
+*Advisory and Assurance Intern -- May 2021-Current*
+
+* Roles and Responsibilities to be Updated Upon Completion 
+
+### Premier Property Management, Oxford, MS
+
+*Assistant Property Manager -- August 2018-November 2018*
+
+* Managed and processed the collection of over $250,000 in revenue for 350+ residents each month
+* Reached out to current and prior tenants with past due balances, filing debt with local government and/or debt collectors as necessary
+* Maintained 2-5% delinquency at closing (lowering total delinquency by 50-90%)
+* Reconciled petty cash and processed invoices weekly
+* Reviewed pre-closing trials and adjusted entries as necessary; Ran Beginning and End of Month
+
+*Acting ‘Co-Property Manager' -- November 2017-February 2018*  
+
+* Operated $360M/36-acre asset
+* Oversaw maintenance department, scheduled staff, coordinated with vendors, handled resident concerns, managed fiscal aspects, ensured standards for staff performance and property condition were met
+* Reported directly to vice president/ownership
+
+*Leasing and Marketing Manager -- May 2017-August 2018*
+
+* Managed staff of 11 community assistants
+* Planned and executed 5-10 resident events monthly and daily marketing campaigns (achieved 75K+ views)
+* Conducted and reported weekly market surveys analyzing 10+ market competitors
+* Increased prelease by over 30%
+* Designed and implemented new procedures that increased office efficiency, provided a better experience for residents, and allowed for revenue growths and cost reductions
+
+*Community Assistant -- November 2016-May 2017*
+
+* Handled 100+ continuous prospect leads: providing tours, responding to phone and online inquiries; following up throughout the application process; finalizing and filing secured leases
+* Executed daily planned marketing campaigns in various mediums; phone, community, online, guerrilla
+* Closed and secured more than 50% of leases for the respective term
+
+
+
+
+
