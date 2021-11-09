@@ -1,7 +1,7 @@
 name: "."
-title: "mfeo"
+title: "This is title"
 description: |
-  mfeo
+  this is description
 output_dir: "docs"
 navbar:
   right:
