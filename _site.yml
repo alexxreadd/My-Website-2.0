@@ -8,7 +8,7 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "Resume"
-      href: Website---Resume-11092021.html
+      href: Website_Resume_11092021.html
     - text: "Tobi"              
       href: tobi.html           
 output: distill::distill_article
