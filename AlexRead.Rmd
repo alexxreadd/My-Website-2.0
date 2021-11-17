@@ -5,7 +5,7 @@ links:
   - label: LinkedIn
     url: "www.linkedin.com/in/alexxreadd"
   - label: Email
-    url: "mailto:alexxreadd@m.com"
+    url: "mailto:alexxreadd@me.com"
 output:
   postcards::jolla
 ---
