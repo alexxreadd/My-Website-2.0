@@ -6,14 +6,14 @@
       "description": "Some additional details about the website about",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-11-17T14:28:43-06:00"
+      "last_modified": "2021-11-17T14:30:24-06:00"
     },
     {
       "path": "AlexRead.html",
       "title": "Alex Read",
       "author": [],
       "contents": "\n\n          \n          \n          This is title on site yml\n          \n          \n          Home\n          Resume\n          Tobi\n          ☰\n          \n          \n      \n        \n          \n            Alex Read\n          \n          \n            \n              I am a student at Mississippi State University with a Bachelor’s in Accounting and am currently studying Masters of Accountancy, with a minor in Data Analytics.\n            \n            \n              I am a student at Mississippi State University with a Bachelor’s in Accounting and am currently studying Masters of Accountancy, with a minor in Data Analytics.\n            \n          \n\n          \n            \n              \n                  \n                    \n                      LinkedIn\n                    \n                  \n                \n                                \n                  \n                    \n                      Email\n                    \n                  \n                \n                              \n          \n\n          \n            \n              \n                                \n                  \n                    LinkedIn\n                  \n                \n                                \n                  \n                    Email\n                  \n                \n                              \n            \n          \n        \n      \n    \n\n    \n    \n    ",
-      "last_modified": "2021-11-17T14:28:43-06:00"
+      "last_modified": "2021-11-17T14:30:25-06:00"
     },
     {
       "path": "index.html",
@@ -21,14 +21,14 @@
       "description": "Welcome to the website. I hope you enjoy it! index\n",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-11-17T14:28:44-06:00"
+      "last_modified": "2021-11-17T14:30:26-06:00"
     },
     {
       "path": "tobi.html",
       "title": "Tobi Burns",
       "author": [],
       "contents": "\n\n          \n          \n          This is title on site yml\n          \n          \n          Home\n          Resume\n          Tobi\n          ☰\n          \n          \n      \n        \n          \n            Tobi Burns\n          \n          \n            \n              I am a classically trained data scientist living in the San Francisco Bay Area. Currently I work on the Oculus team at Facebook. I love talking about baseball, true crime podcasts, and causal inference.\n            \n            \n              I am a classically trained data scientist living in the San Francisco Bay Area. Currently I work on the Oculus team at Facebook. I love talking about baseball, true crime podcasts, and causal inference.\n            \n          \n\n          \n            \n              \n                  \n                    \n                      LinkedIn\n                    \n                  \n                \n                                \n                  \n                    \n                      Twitter\n                    \n                  \n                \n                                \n                  \n                    \n                      GitHub\n                    \n                  \n                \n                                \n                  \n                    \n                      Email\n                    \n                  \n                \n                              \n          \n\n          \n            \n              \n                                \n                  \n                    LinkedIn\n                  \n                \n                                \n                  \n                    Twitter\n                  \n                \n                                \n                  \n                    GitHub\n                  \n                \n                                \n                  \n                    Email\n                  \n                \n                              \n            \n          \n        \n      \n    \n\n    \n    \n    ",
-      "last_modified": "2021-11-17T14:28:44-06:00"
+      "last_modified": "2021-11-17T14:30:26-06:00"
     },
     {
       "path": "Website_Resume_11092021.html",
@@ -42,7 +42,7 @@
       ],
       "date": "`r Sys.Date()`",
       "contents": "\nEducation\nMississippi State University, Starkville, MS\nBachelor of Accountancy – Completed August 2021\nMasters of Professional Accountancy, Minor in Data Analytics – Expected Graduation August 2022\nSkills\nCritical Thinker | Customer and Client Focused\nLeadership Abilities | Efficient\nResults Driven | Property and Resident Management Programs\nWork Experience\nHORNE Cyber, Ridgeland, MS\nAdvisory and Assurance Intern – May 2021-Current\nRoles and Responsibilities to be Updated Upon Completion\nPremier Property Management, Oxford, MS\nAssistant Property Manager – August 2018-November 2018\nManaged and processed the collection of over $250,000 in revenue for 350+ residents each month\nReached out to current and prior tenants with past due balances, filing debt with local government and/or debt collectors as necessary\nMaintained 2-5% delinquency at closing (lowering total delinquency by 50-90%)\nReconciled petty cash and processed invoices weekly\nReviewed pre-closing trials and adjusted entries as necessary; Ran Beginning and End of Month\nActing ‘Co-Property Manager’ – November 2017-February 2018\nOperated $360M/36-acre asset\nOversaw maintenance department, scheduled staff, coordinated with vendors, handled resident concerns, managed fiscal aspects, ensured standards for staff performance and property condition were met\nReported directly to vice president/ownership\nLeasing and Marketing Manager – May 2017-August 2018\nManaged staff of 11 community assistants\nPlanned and executed 5-10 resident events monthly and daily marketing campaigns (achieved 75K+ views)\nConducted and reported weekly market surveys analyzing 10+ market competitors\nIncreased prelease by over 30%\nDesigned and implemented new procedures that increased office efficiency, provided a better experience for residents, and allowed for revenue growths and cost reductions\nCommunity Assistant – November 2016-May 2017\nHandled 100+ continuous prospect leads: providing tours, responding to phone and online inquiries; following up throughout the application process; finalizing and filing secured leases\nExecuted daily planned marketing campaigns in various mediums; phone, community, online, guerrilla\nClosed and secured more than 50% of leases for the respective term\n\n\n\n",
-      "last_modified": "2021-11-17T14:28:45-06:00"
+      "last_modified": "2021-11-17T14:30:27-06:00"
     }
   ],
   "collections": []
