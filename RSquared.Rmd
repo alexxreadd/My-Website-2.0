@@ -1,0 +1,19 @@
+---
+title: "R-Squared Is Bad..."
+description: |
+  A new article created using the Distill format.
+author:
+  - name: Nora Jones 
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+
+Rsquared tab: This tab will contain at least one problem with using Rsquared as a model fit measure. There were 5 mentioned in class, choose at least one. Before my code: Include why you think this problem is interesting or a big issue. After my code: Give a suggestion on the solution.
+
+
+
+
