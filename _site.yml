@@ -1,14 +1,16 @@
-name: "."
-title: "This is title on site yml"
+name: ". name yml"
+title: "Alex Read Title"
 description: |
   this is description on site yml
 output_dir: "docs"
 navbar:
   right:
     - text: "Home"
-      href: index.html
+      href: AlexRead.html
     - text: "Resume"
       href: Website_Resume_11092021.html
-    - text: "Tobi"              
-      href: tobi.html           
+    - text: "Projects"              
+      menu:
+      - text: "R-Squared Is Bad..."
+      - href: RSquared.html
 output: distill::distill_article
