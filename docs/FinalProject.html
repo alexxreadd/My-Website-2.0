@@ -2072,7 +2072,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <a href="index.html" class="title">Alex Read</a>
 </div>
 <div class="nav-right">
-<a href="AlexRead.html">Home</a>
+<a href="index.html">Home</a>
 <a href="Résumé.html">Résumé</a>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
@@ -2103,6 +2103,44 @@ Projects
 
 
 <div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#data-background">Data Background</a></li>
+<li><a href="#understanding-the-data">Understanding the Data</a>
+<ul>
+<li><a href="#high-level-ph-statistics">High-level pH statistics:</a></li>
+<li><a href="#visualize">Visualize</a>
+<ul>
+<li><a href="#locations">Locations</a></li>
+<li><a href="#years">Years</a></li>
+</ul></li>
+<li><a href="#recap">Recap</a></li>
+</ul></li>
+<li><a href="#neural-networks-cite">Neural Networks – cite!!</a></li>
+<li><a href="#predicting-ph-with-neural-networks">Predicting pH with Neural Networks</a>
+<ul>
+<li><a href="#splitting-the-data">Splitting the data</a></li>
+<li><a href="#running-the-model">Running the model</a></li>
+<li><a href="#predict">Predict</a></li>
+<li><a href="#results">Results</a>
+<ul>
+<li><a href="#root-mean-squared-error">Root Mean Squared Error</a></li>
+<li><a href="#r-squared">R-Squared</a></li>
+</ul></li>
+<li><a href="#visualize-1">Visualize</a>
+<ul>
+<li><a href="#results-plot">Results Plot</a></li>
+<li><a href="#results-plot-with-contour">Results Plot with Contour</a></li>
+<li><a href="#d-surface-plot-uncomment">3-D Surface Plot UNCOMMENT</a></li>
+<li><a href="#d-surface-plot-interpolate-uncomment">3-D Surface Plot Interpolate UNCOMMENT</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#what-the-results-mean">What The Results Mean</a></li>
+</ul>
+</nav>
+</div>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
@@ -99813,7 +99851,6 @@ STORET
 </div>
 </div>
 <h1 id="understanding-the-data">Understanding the Data</h1>
-<p>tie actual into model below later do these charts w findings; compare</p>
 <h2 id="high-level-ph-statistics">High-level pH statistics:</h2>
 <div class="layout-chunk" data-layout="l-body">
 <details>
@@ -99841,7 +99878,8 @@ X1    1 1842 6.61 0.75   6.41    6.54 0.58 3.28 9.17  5.89 0.88
    kurtosis   se
 X1     0.52 0.02</code></pre>
 </div>
-<h2 id="vizualize">Vizualize</h2>
+<h2 class="panelset" id="visualize">Visualize</h2>
+<h3 id="locations">Locations</h3>
 <p>Some locations, like Canton, seem to have pH values all over the place - while others, like Fannin, seem to have pH values that are mostly close to each other.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
@@ -99855,6 +99893,7 @@ Show code
 </details>
 <p><img src="FinalProject_files/figure-html5/2.boxplot.locations-1.png" width="624" /></p>
 </div>
+<h3 id="years">Years</h3>
 <p>Some years, like 2017 and 2018, seem to have pH values all over the place - while others, like 2020, seem to have pH values that are mostly close to each other.</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
@@ -99871,8 +99910,8 @@ Show code
 <h2 id="recap">Recap</h2>
 <p>Based on the summary statistics and plots above, it is clear that pH values are skewed and there are some outliers.</p>
 <h1 id="neural-networks-cite">Neural Networks – cite!!</h1>
-<p>The Neural Networks machine learning model gets it’s name from the highly complex, rapid-processing system of the human network system. Neural networks is useful in complex datasets, as it is adaptive and processes parallel information instead of only linear. Neural networks process information in layers - starting with raw input, then hidden layers where it learns and trains from the inputs, and then the output layer where we see the prediction.</p>
-<h1 id="predicting-ph-with-neural-networks-4.-split-data-run-model-and-find-the-results">Predicting pH with Neural Networks 4. Split data, run model, and find the results</h1>
+<p>The Neural Networks machine learning model gets it’s name from the highly complex, rapid-processing system of the human network system. Neural networks is useful in complex datasets, as it is adaptive and processes parallel information instead of only linear. Neural networks process information in layers - starting with raw input, then hidden layers where it learns and trains from the inputs, and then the output layer where we see the prediction. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<h1 id="predicting-ph-with-neural-networks">Predicting pH with Neural Networks</h1>
 <h2 id="splitting-the-data">Splitting the data</h2>
 <div class="layout-chunk" data-layout="l-body">
 <details>
@@ -103677,7 +103716,7 @@ Show code
 </details>
 </div>
 <h2 id="results">Results</h2>
-Root Mean Squared Error
+<h3 id="root-mean-squared-error">Root Mean Squared Error</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -103690,7 +103729,7 @@ Show code
 </details>
 <pre><code>[1] 0.588621</code></pre>
 </div>
-R-Squared
+<h3 id="r-squared">R-Squared</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -103703,8 +103742,8 @@ Show code
 </details>
 <pre><code>[1] 0.4204379</code></pre>
 </div>
-<h2 id="visualize">Visualize</h2>
-<p>Results Plot</p>
+<h2 id="visualize-1">Visualize</h2>
+<h3 id="results-plot">Results Plot</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -103721,7 +103760,7 @@ Show code
 </details>
 <p><img src="FinalProject_files/figure-html5/4.resultsplot-1.png" width="624" /></p>
 </div>
-<p>Results Plot with Contour</p>
+<h3 id="results-plot-with-contour">Results Plot with Contour</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -103734,7 +103773,7 @@ Show code
 </details>
 <p><img src="FinalProject_files/figure-html5/4.resultsplotcontour-1.png" width="624" /></p>
 </div>
-<p>3-D Surface Plot</p>
+<h3 id="d-surface-plot-uncomment">3-D Surface Plot UNCOMMENT</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -103748,7 +103787,7 @@ Show code
 </div>
 </details>
 </div>
-<p>3-D Surface Plot Interpolate</p>
+<h3 id="d-surface-plot-interpolate-uncomment">3-D Surface Plot Interpolate UNCOMMENT</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -103772,10 +103811,17 @@ Show code
 </details>
 </div>
 <h1 id="what-the-results-mean">What The Results Mean</h1>
-<p>Looking at the results, and considering the information about R-Squared <a href="alexxreadd.com/RSquared">here</a>, we are able to see an error rate of about 59%; meaning, we have an accuracy of around 41%. While 41% accuracy is not typically desirable, it is pretty impressive that a machine learning model can take the skewed data and have the accuracy it does when predicting pH based off the location, hour, and year water was sampled in a 200-acre body of water that a river constantly flows through.</p>
+<p>Looking at the results, and considering the information about R-Squared <a href="alexxreadd.com/RSquared.html">here</a>, we are able to see an error rate of about 59%; meaning, we have an accuracy of around 41%. While 41% accuracy is not typically desirable, it is pretty impressive that a machine learning model can take the skewed data and have the accuracy it does when predicting pH based off the location, hour, and year water was sampled in a 200-acre body of water that a river constantly flows through.</p>
 <p>The value to be gained from this model and others like it are limitless. For instance, a researcher might spend time collecting samples in a highly-polluted body of water in a third-world country, where the body of water is the local resident’s only drinking source. The researcher then can run the neural networks model, or various others, and obtain predictions that can be critical to the resident’s health if it determined that certain chemicals in the water are at unsafe levels only in the peak of the morning or similar.</p>
 <p>In accounting, the value is also limitless. Models can be used to more accurately determine estimates for accounts like Warranty Liability, Return Merchandise, Allowance for Doubtful Accounts, and much more. Models can even be used to [once you 2nd paper is published I’ll write the title of it here and link the journal]</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Information from <a href="https://www.analyticsvidhya.com/blog/2017/09/creating-visualizing-neural-network-in-r/" class="uri">https://www.analyticsvidhya.com/blog/2017/09/creating-visualizing-neural-network-in-r/</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Information from <a href="https://datascienceplus.com/neuralnet-train-and-test-neural-networks-using-r/" class="uri">https://datascienceplus.com/neuralnet-train-and-test-neural-networks-using-r/</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -8,6 +8,7 @@ output: distill::distill_article
 ```{r DocumentSetUp, echo=FALSE}
 library(tidyverse)
 library(caret)
+library(xaringan)
 ```
 
 ```{r 1.organizing, echo=FALSE}
@@ -39,8 +40,6 @@ knitr::kable(FinalProjectData_Clean)%>%
 ```
 
 # Understanding the Data
-tie actual into model below later
-do these charts w findings; compare
 
 ## High-level pH statistics:
 
@@ -50,13 +49,17 @@ summary(FinalProjectData$pH)
 psych::describe(FinalProjectData$pH)
 ```
 
-## Vizualize 
+## Visualize {.panelset}
+
+### Locations
 
 Some locations, like Canton, seem to have pH values all over the place - while others, like Fannin, seem to have pH values that are mostly close to each other. 
 
 ```{r 2.boxplot.locations, code_folding=TRUE}
 ggplot(data=FinalProjectData,mapping = aes(x=MonitoringLocationDescriptionText,y=pH))+geom_boxplot()
 ```
+
+### Years
 
 Some years, like 2017 and 2018, seem to have pH values all over the place - while others, like 2020, seem to have pH values that are mostly close to each other. 
 
@@ -70,7 +73,7 @@ Based on the summary statistics and plots above, it is clear that pH values are 
 
 # Neural Networks -- cite!!
 
-The Neural Networks machine learning model gets it's name from the highly complex, rapid-processing system of the human network system. Neural networks is useful in complex datasets, as it is adaptive and processes parallel information instead of only  linear. Neural networks process information in layers - starting with raw input, then hidden layers where it learns and trains from the inputs, and then the output layer where we see the prediction. 
+The Neural Networks machine learning model gets it's name from the highly complex, rapid-processing system of the human network system. Neural networks is useful in complex datasets, as it is adaptive and processes parallel information instead of only  linear. Neural networks process information in layers - starting with raw input, then hidden layers where it learns and trains from the inputs, and then the output layer where we see the prediction. ^[Information from https://www.analyticsvidhya.com/blog/2017/09/creating-visualizing-neural-network-in-r/] ^[Information from https://datascienceplus.com/neuralnet-train-and-test-neural-networks-using-r/]
 
 # Predicting pH with Neural Networks
 
@@ -120,13 +123,13 @@ waterNNETtestpred<-cbind(waterNNET_Pred,waterTest)
 
 ## Results
 
-Root Mean Squared Error
+### Root Mean Squared Error
 
 ```{r 4.results.RMSE, code_folding=TRUE}
 RMSE(waterNNETtestpred$waterNNET_Pred,waterNNETtestpred$pH)
 ```
 
-R-Squared
+### R-Squared
 
 ```{r 4.results.RSquared, code_folding=TRUE}
 cor(waterNNETtestpred$waterNNET_Pred,waterNNETtestpred$pH)^2
@@ -134,7 +137,7 @@ cor(waterNNETtestpred$waterNNET_Pred,waterNNETtestpred$pH)^2
 
 ## Visualize
 
-Results Plot
+### Results Plot
 
 ```{r 4.resultsplot, code_folding=TRUE}
 pH_Scale <- colorRampPalette(c("springgreen2", "springgreen3", "aquamarine4"))
@@ -144,13 +147,13 @@ pd <- pdp::partial(waterNNET, pred.var = c("Year","Hour"))
 pdp::plotPartial(pd)
 ```
 
-Results Plot with Contour
+### Results Plot with Contour
 
 ```{r 4.resultsplotcontour, code_folding=TRUE}
 pdp::plotPartial(pd, contour = TRUE, col.regions = pH_Scale)
 ```
 
-3-D Surface Plot
+### 3-D Surface Plot UNCOMMENT
 
 ```{r 4.3D, code_folding=TRUE}
 # 3-D surface
@@ -158,7 +161,7 @@ pdp::plotPartial(pd, contour = TRUE, col.regions = pH_Scale)
               #      screen = list(z = -20, x = -60))
 ```
 
-3-D Surface Plot Interpolate
+### 3-D Surface Plot Interpolate UNCOMMENT
 
 ```{r 4.3dinterpolate, code_folding=TRUE}
 # <- akima::interp(x = pd$Year, y = pd$Hour, z = pd$yhat)
@@ -177,7 +180,7 @@ pdp::plotPartial(pd, contour = TRUE, col.regions = pH_Scale)
 
 # What The Results Mean
 
-Looking at the results, and considering the information about R-Squared [here](alexxreadd.com/RSquared), we are able to see an error rate of about 59%; meaning, we have an accuracy of around 41%. While 41% accuracy is not typically desirable, it is pretty impressive that a machine learning model can take the skewed data and have the accuracy it does when predicting pH based off the location, hour, and year water was sampled in a 200-acre body of water that a river constantly flows through.
+Looking at the results, and considering the information about R-Squared [here](alexxreadd.com/RSquared.html), we are able to see an error rate of about 59%; meaning, we have an accuracy of around 41%. While 41% accuracy is not typically desirable, it is pretty impressive that a machine learning model can take the skewed data and have the accuracy it does when predicting pH based off the location, hour, and year water was sampled in a 200-acre body of water that a river constantly flows through.
 
 The value to be gained from this model and others like it are limitless. For instance, a researcher might spend time collecting samples in a highly-polluted body of water in a third-world country, where the body of water is the local resident's only drinking source. The researcher then can run the neural networks model, or various others, and obtain predictions that can be critical to the resident's health if it determined that certain chemicals in the water are at unsafe levels only in the peak of the morning or similar.
 

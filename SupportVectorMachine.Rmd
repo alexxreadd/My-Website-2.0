@@ -1,23 +1,145 @@
 ---
-title: "Untitled"
+title: "Support Vector Machine"
 description: |
-  A new article created using the Distill format.
-author:
-  - name: Nora Jones 
-    url: https://example.com/norajones
-    affiliation: Spacely Sprockets
-    affiliation_url: https://example.com/spacelysprokets
-date: "`r Sys.Date()`"
+  Understanding and following a machine learning model. You may click "Show code" on any of the elements to see their source.
 output: distill::distill_article
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+library(caret)
+library(tidyverse)
+library(rsample)
+library(tidyverse)
+library(curl)
+load(curl("https://raw.githubusercontent.com/Professor-Hunt/ACC8143/main/data/tips.rda"))
 ```
 
-ML tab: Use one of your exercises to show off a machine learning model. Before the code: Describe the model like you are teaching a 5th grader. No math...just as simple as you can. No more than a paragraph. Describe the process and result. Also, add how you can apply this to accounting.
 
-See In Class Work from 11152021 + video from then if needed + SVM page on website
+# What is SVM?
+
+Support Vector Machine (SVM) starts off with information, or data, you give it. It then looks at the data and tries to find categories of similarities within and splits the data based on these categories .. think of it looking at all the different types of food and putting them in different piles. Candy might be in one pile, and vegetables in a different pile, and breakfast in another. Except with SVM, you don't have to make the piles - we can tell it things, called variables, about the pile of food and it uses that to make the piles on it own. Think about it like telling a computer "candy is sweet" or "waffles are only for breakfast" and it using that to sort the pile for you! ^[https://professor-hunt.github.io/ACC8143/Support_Vector_Machine.html]
+
+# Process and result{.panelset}
+
+Watch as we run SVM and change the amount of data we give it to learn from.
+
+## 60%
+
+Here, we tell the computer 60% of the information we know about the types of food we've given it.
+
+```{r SVM.1.60, code_folding=TRUE}
+set.seed(1)
+trainIndex <- createDataPartition(iris$Species, p = .60, list = FALSE, times = 1)
+SVMTrain <- iris[ trainIndex,]
+SVMTest  <- iris[-trainIndex,]
+
+iris_SVM <- train(
+  form = factor(Species) ~ .,
+  data = SVMTrain,
+  trControl = trainControl(method = "cv", number = 10,
+                           classProbs =  TRUE),
+  method = "svmLinear",
+  preProcess = c("center", "scale"),
+  tuneLength = 10)
+iris_SVM
+
+summary(iris_SVM)
+
+svm_Pred<-predict(iris_SVM,SVMTest,type="prob")
+
+svmtestpred<-cbind(svm_Pred,SVMTest)
+
+svmtestpred<-svmtestpred%>%
+  mutate(prediction=if_else(setosa>versicolor & setosa>virginica,"setosa",
+                            if_else(versicolor>setosa & versicolor>virginica, "versicolor",
+                                    if_else(virginica>setosa & virginica>versicolor,"virginica", "PROBLEM"))))
+
+table(svmtestpred$prediction)
+confusionMatrix(factor(svmtestpred$prediction),factor(svmtestpred$Species))
+```
+
+## 75%
+
+Here, we tell the computer 75% of the information we know about the types of food we've given it.
+
+```{r SVM.1.75, code_folding=TRUE}
+set.seed(1)
+trainIndex <- createDataPartition(iris$Species, p = .75, list = FALSE, times = 1)
+SVMTrain <- iris[ trainIndex,]
+SVMTest  <- iris[-trainIndex,]
+
+iris_SVM <- train(
+  form = factor(Species) ~ .,
+  data = SVMTrain,
+  trControl = trainControl(method = "cv", number = 10,
+                           classProbs =  TRUE),
+  method = "svmLinear",
+  preProcess = c("center", "scale"),
+  tuneLength = 10)
+iris_SVM
+
+summary(iris_SVM)
+
+svm_Pred<-predict(iris_SVM,SVMTest,type="prob")
+
+svmtestpred<-cbind(svm_Pred,SVMTest)
+
+svmtestpred<-svmtestpred%>%
+  mutate(prediction=if_else(setosa>versicolor & setosa>virginica,"setosa",
+                            if_else(versicolor>setosa & versicolor>virginica, "versicolor",
+                                    if_else(virginica>setosa & virginica>versicolor,"virginica", "PROBLEM"))))
+
+table(svmtestpred$prediction)
+confusionMatrix(factor(svmtestpred$prediction),factor(svmtestpred$Species))
+```
+
+## 50%
+
+Here, we tell the computer 50% of the information we know about the types of food we've given it.
+
+```{r SVM.1.50, code_folding=TRUE}
+set.seed(1)
+trainIndex <- createDataPartition(iris$Species, p = .5, list = FALSE, times = 1)
+SVMTrain <- iris[ trainIndex,]
+SVMTest  <- iris[-trainIndex,]
+
+iris_SVM <- train(
+  form = factor(Species) ~ .,
+  data = SVMTrain,
+  trControl = trainControl(method = "cv", number = 10,
+                           classProbs =  TRUE),
+  method = "svmLinear",
+  preProcess = c("center", "scale"),
+  tuneLength = 10)
+iris_SVM
+
+summary(iris_SVM)
+
+svm_Pred<-predict(iris_SVM,SVMTest,type="prob")
+
+svmtestpred<-cbind(svm_Pred,SVMTest)
+
+svmtestpred<-svmtestpred%>%
+  mutate(prediction=if_else(setosa>versicolor & setosa>virginica,"setosa",
+                            if_else(versicolor>setosa & versicolor>virginica, "versicolor",
+                                    if_else(virginica>setosa & virginica>versicolor,"virginica", "PROBLEM"))))
+
+table(svmtestpred$prediction)
+confusionMatrix(factor(svmtestpred$prediction),factor(svmtestpred$Species))
+```
+
+
+
+# What does this mean? 
+
+As you can see, when we give it a little information, SVM is right about 91% of the time. And when we give it a little more, it's right about 96% of the time. Finally, when we give it even more information, it's right about 98% of the time. This makes sense, because if you only tell somebody one thing about one type of food in a huge pile - they might not be good at splitting the pile up. But if you tell someone 10 things about foods in a pile - they're much more likely to split the piles up the right way.
+
+
+# How can you apply this to accounting?
+
+In accounting, the value is also limitless. Models can be used to more accurately determine estimates for accounts like Warranty Liability, Return Merchandise, Allowance for Doubtful Accounts, and much more. Models can even be used to [once you 2nd paper is published I'll write the title of it here and link the journal]
+
+
 
 
 

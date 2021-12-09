@@ -1,19 +1,54 @@
 ---
 title: "R-Squared Is Bad..."
 description: |
-  R Squard is bad or R squared isnt as good as it seems, something like that; fix spelling mistake in first squared
-author:
-  - name: Nora Jones 
-    url: https://example.com/norajones
-    affiliation: Spacely Sprockets
-    affiliation_url: https://example.com/spacelysprokets
-date: "`r Sys.Date()`"
+  R-Squared might not should be that go-to value we use to make decisions based on.
 output: distill::distill_article
 ---
 
+# R-Squared Changes Based on How Many Observations There Are
 
-Rsquared tab: This tab will contain at least one problem with using Rsquared as a model fit measure. There were 5 mentioned in class, choose at least one. Before my code: Include why you think this problem is interesting or a big issue. After my code: Give a suggestion on the solution.
+R-squared says nothing about prediction error, even with σ2 exactly the same, and no change in the coefficients. R-squared can be anywhere between 0 and 1 just by changing the range of X. ^[https://professor-hunt.github.io/ACC8143/Rsquared_Bad.html]
 
+As you can see below, by simply including more values - the R-Squared can be drastically increased (or decreased); which, is a concern because someone preparing summary statistics of data could manipulate the number of observations to benefit them. All this can be done while other, more reliable predictions, such as mean square error, stay the same (given the regression is the same) no matter the number of observations.
 
+# Compare R-Squared
 
+## 10 X Observations
 
+```{r RSquared10, code_folding=TRUE}
+x <- seq(1,10,length.out = 100)
+set.seed(1)
+y <- 2 + 1.2*x + rnorm(100,0,sd = 0.9)
+RS10 <- lm(y ~ x)
+summary(RS10)$r.squared
+```
+
+## 2 X Observations 
+
+```{r RSquared2, code_folding=TRUE}
+x <- seq(1,2,length.out = 100)
+set.seed(1)
+y <- 2 + 1.2*x + rnorm(100,0,sd = 0.9)
+RS2 <- lm(y ~ x)
+summary(RS2)$r.squared
+```
+
+# Compare Mean Squared Error
+
+Note that above in the code chunk, I named the object with 10 observations 'RS10' and the object with 2 observations 'RS2'. Now, let's look at the mean squared error for each.
+
+## 10 X Observations
+
+```{r MSE10, code_folding=TRUE}
+sum((fitted(RS10) - y)^2)/100
+```
+
+## 2 X Observations
+
+```{r MSE2, code_folding=TRUE}
+sum((fitted(RS2) - y)^2)/100
+```
+
+# What to do about it?
+
+As you can see, just by changing the number of observations alone makes R-Squared an unreliable prediction measure. However, you can also see that factors as simple as number of observations does not effect the mean squared error. For that reason, I suggest taking some TNT to R-Squared and using the advanced machine learning model options available for free in the R program to get predictions that'd blow R-Squared out of the water! Browse my 'Projects' tab to see more on some of these models such as [Support Vector Maching](alexxreadd.com/SupportVectorMachine.html) and [Neural Networks](alexxreadd.com/FinalProject.html); though, I think good 'ole Google might be a better resource than I. 
