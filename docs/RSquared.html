@@ -2104,15 +2104,10 @@ Projects
 <h3>Contents</h3>
 <ul>
 <li><a href="#r-squared-changes-based-on-how-many-observations-there-are">R-Squared Changes Based on How Many Observations There Are</a></li>
-<li><a href="#compare-r-squared">Compare R-Squared</a>
+<li><a href="#compare-r-squared-mean-squared-error">Compare R-Squared &amp; Mean Squared Error</a>
 <ul>
 <li><a href="#x-observations">10 X Observations</a></li>
 <li><a href="#x-observations-1">2 X Observations</a></li>
-</ul></li>
-<li><a href="#compare-mean-squared-error">Compare Mean Squared Error</a>
-<ul>
-<li><a href="#x-observations-2">10 X Observations</a></li>
-<li><a href="#x-observations-3">2 X Observations</a></li>
 </ul></li>
 <li><a href="#what-to-do-about-it">What to do about it?</a></li>
 </ul>
@@ -2121,8 +2116,9 @@ Projects
 <h1 id="r-squared-changes-based-on-how-many-observations-there-are">R-Squared Changes Based on How Many Observations There Are</h1>
 <p>R-squared says nothing about prediction error, even with σ2 exactly the same, and no change in the coefficients. R-squared can be anywhere between 0 and 1 just by changing the range of X. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>As you can see below, by simply including more values - the R-Squared can be drastically increased (or decreased); which, is a concern because someone preparing summary statistics of data could manipulate the number of observations to benefit them. All this can be done while other, more reliable predictions, such as mean square error, stay the same (given the regression is the same) no matter the number of observations.</p>
-<h1 id="compare-r-squared">Compare R-Squared</h1>
+<h1 id="compare-r-squared-mean-squared-error">Compare R-Squared &amp; Mean Squared Error</h1>
 <h2 id="x-observations">10 X Observations</h2>
+<p>Setting Up The Regression</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2133,32 +2129,24 @@ Show code
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
 <span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fl'>2</span> <span class='op'>+</span> <span class='fl'>1.2</span><span class='op'>*</span><span class='va'>x</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span>,<span class='fl'>0</span>,sd <span class='op'>=</span> <span class='fl'>0.9</span><span class='op'>)</span>
 <span class='va'>RS10</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>x</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>RS10</span><span class='op'>)</span><span class='op'>$</span><span class='va'>r.squared</span>
 </code></pre>
 </div>
 </details>
-<pre><code>[1] 0.9383379</code></pre>
 </div>
-<h2 id="x-observations-1">2 X Observations</h2>
+<p>R-Squared</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
 Show code
 </summary>
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,length.out <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fl'>2</span> <span class='op'>+</span> <span class='fl'>1.2</span><span class='op'>*</span><span class='va'>x</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span>,<span class='fl'>0</span>,sd <span class='op'>=</span> <span class='fl'>0.9</span><span class='op'>)</span>
-<span class='va'>RS2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>x</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>RS2</span><span class='op'>)</span><span class='op'>$</span><span class='va'>r.squared</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>RS10</span><span class='op'>)</span><span class='op'>$</span><span class='va'>r.squared</span>
 </code></pre>
 </div>
 </details>
-<pre><code>[1] 0.1502448</code></pre>
+<pre><code>[1] 0.9383379</code></pre>
 </div>
-<h1 id="compare-mean-squared-error">Compare Mean Squared Error</h1>
-<p>Note that above in the code chunk, I named the object with 10 observations ‘RS10’ and the object with 2 observations ‘RS2’. Now, let’s look at the mean squared error for each.</p>
-<h2 id="x-observations-2">10 X Observations</h2>
+<p>Mean Squared Error</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2169,9 +2157,38 @@ Show code
 </code></pre>
 </div>
 </details>
-<pre><code>[1] 31.52196</code></pre>
+<pre><code>[1] 0.6468052</code></pre>
 </div>
-<h2 id="x-observations-3">2 X Observations</h2>
+<h2 id="x-observations-1">2 X Observations</h2>
+<p>Setting Up The Regression</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,length.out <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fl'>2</span> <span class='op'>+</span> <span class='fl'>1.2</span><span class='op'>*</span><span class='va'>x</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span>,<span class='fl'>0</span>,sd <span class='op'>=</span> <span class='fl'>0.9</span><span class='op'>)</span>
+<span class='va'>RS2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>x</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>R-Squared</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>RS2</span><span class='op'>)</span><span class='op'>$</span><span class='va'>r.squared</span>
+</code></pre>
+</div>
+</details>
+<pre><code>[1] 0.1502448</code></pre>
+</div>
+<p>Mean Squared Error</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2185,7 +2202,7 @@ Show code
 <pre><code>[1] 0.6468052</code></pre>
 </div>
 <h1 id="what-to-do-about-it">What to do about it?</h1>
-<p>As you can see, just by changing the number of observations alone makes R-Squared an unreliable prediction measure. However, you can also see that factors as simple as number of observations does not effect the mean squared error. For that reason, I suggest taking some TNT to R-Squared and using the advanced machine learning model options available for free in the R program to get predictions that’d blow R-Squared out of the water! Browse my ‘Projects’ tab to see more on some of these models such as <a href="alexxreadd.com/SupportVectorMachine.html">Support Vector Maching</a> and <a href="alexxreadd.com/FinalProject.html">Neural Networks</a>; though, I think good ’ole Google might be a better resource than I.</p>
+<p>As you can see, just by changing the number of observations alone makes R-Squared an unreliable prediction measure. However, you can also see that factors as simple as number of observations does not effect the mean squared error. For that reason, I suggest taking some TNT to R-Squared and using the advanced machine learning model options available for free in the R program to get predictions that’d blow R-Squared out of the water! Browse my ‘Projects’ tab to see more on some of these models such as <a href="alexxreadd.com/SupportVectorMachine.html">Support Vector Machine</a> and <a href="alexxreadd.com/FinalProject.html">Neural Networks</a>; though, I think good ’ole Google might be a better resource than I.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section class="footnotes" role="doc-endnotes">
 <hr />

@@ -27,6 +27,7 @@ FinalProjectData[FinalProjectData == "NEAR SAND HILL MID-LAKE BELOW HWY 43 4 MIL
 # Data Background
 
 In this project, I am using data from the [National Water Quality Monitoring Counsel.](waterqualitydata.us) The records I choose to include were all samples in the Ross Barnett Reservoir from 4 different areas in the years 2016-2020. I am using the following variables to predict pH:
+
 - monitoring location (4 different values)
 - hour (24 different values)
 - year (4 different values)
@@ -71,7 +72,7 @@ ggplot(data=FinalProjectData,mapping = aes(group=Year,x=Year,y=pH))+geom_boxplot
 
 Based on the summary statistics and plots above, it is clear that pH values are skewed and there are some outliers.
 
-# Neural Networks -- cite!!
+# Neural Networks
 
 The Neural Networks machine learning model gets it's name from the highly complex, rapid-processing system of the human network system. Neural networks is useful in complex datasets, as it is adaptive and processes parallel information instead of only  linear. Neural networks process information in layers - starting with raw input, then hidden layers where it learns and trains from the inputs, and then the output layer where we see the prediction. ^[Information from https://www.analyticsvidhya.com/blog/2017/09/creating-visualizing-neural-network-in-r/] ^[Information from https://datascienceplus.com/neuralnet-train-and-test-neural-networks-using-r/]
 
@@ -153,34 +154,33 @@ pdp::plotPartial(pd)
 pdp::plotPartial(pd, contour = TRUE, col.regions = pH_Scale)
 ```
 
-### 3-D Surface Plot UNCOMMENT
+### 3-D Surface Plot
 
 ```{r 4.3D, code_folding=TRUE}
-# 3-D surface
-#pdp::plotPartial(pd, levelplot = FALSE, zlab = "pH", colorkey = TRUE, 
-              #      screen = list(z = -20, x = -60))
+pdp::plotPartial(pd, levelplot = FALSE, zlab = "pH", colorkey = TRUE, 
+                    screen = list(z = -20, x = -60))
 ```
 
-### 3-D Surface Plot Interpolate UNCOMMENT
+### 3-D Surface Plot Interpolate
 
 ```{r 4.3dinterpolate, code_folding=TRUE}
-# <- akima::interp(x = pd$Year, y = pd$Hour, z = pd$yhat)
+dens <- akima::interp(x = pd$Year, y = pd$Hour, z = pd$yhat)
 
-#p3 <- plotly::plot_ly(x = dens$x, 
- #         y = dens$y, 
-  #        z = dens$z,
-   #       colors = c("springgreen2", "springgreen3", "aquamarine4"),
-    #      type = "surface")
+p3 <- plotly::plot_ly(x = dens$x, 
+          y = dens$y, 
+          z = dens$z,
+          colors = c("springgreen2", "springgreen3", "aquamarine4"),
+          type = "surface")
 
-#p3 <- p3%>% plotly::layout(scene = list(xaxis = list(title = 'Year'),
-                 #    yaxis = list(title = 'Hour'),
-                #     zaxis = list(title = 'Predicteed pH')))
-#p3
+p3 <- p3%>% plotly::layout(scene = list(xaxis = list(title = 'Year'),
+                     yaxis = list(title = 'Hour'),
+                     zaxis = list(title = 'Predicteed pH')))
+p3
 ```
 
 # What The Results Mean
 
-Looking at the results, and considering the information about R-Squared [here](alexxreadd.com/RSquared.html), we are able to see an error rate of about 59%; meaning, we have an accuracy of around 41%. While 41% accuracy is not typically desirable, it is pretty impressive that a machine learning model can take the skewed data and have the accuracy it does when predicting pH based off the location, hour, and year water was sampled in a 200-acre body of water that a river constantly flows through.
+Looking at the results, and considering the information about R-Squared [here](/RSquared.html), we are able to see an error rate of about 59%; meaning, we have an accuracy of around 41%. While 41% accuracy is not typically desirable, it is pretty impressive that a machine learning model can take the skewed data and have the accuracy it does when predicting pH based off the location, hour, and year water was sampled in a 200-acre body of water that a river constantly flows through.
 
 The value to be gained from this model and others like it are limitless. For instance, a researcher might spend time collecting samples in a highly-polluted body of water in a third-world country, where the body of water is the local resident's only drinking source. The researcher then can run the neural networks model, or various others, and obtain predictions that can be critical to the resident's health if it determined that certain chemicals in the water are at unsafe levels only in the peak of the morning or similar.
 
