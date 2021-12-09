@@ -9,12 +9,12 @@ navbar:
       href: Résumé.html
     - text: "Projects"              
       menu:
-      - text: "R-Squared"
-        href: RSquared.html
-      - text: "Support Vector Machine"
-        href: SupportVectorMachine.html
-      - text: "ACC 8053 - Final Project"
-        href: FinalProject.html
+        - text: "R-Squared"
+          href: RSquared.html
+        - text: "Support Vector Machine"
+          href: SupportVectorMachine.html
+        - text: "ACC 8053 - Final Project"
+          href: FinalProject.html
 output: 
   distill::distill_article:
     toc: true
