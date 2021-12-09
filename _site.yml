@@ -4,7 +4,7 @@ output_dir: "docs"
 navbar:
   right:
     - text: "Home"
-      href: AlexRead.html
+      href: index.html
     - text: "Résumé"
       href: Résumé.html
     - text: "Projects"              
