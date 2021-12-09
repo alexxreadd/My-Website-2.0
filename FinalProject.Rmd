@@ -1,25 +1,182 @@
 ---
-title: "Untitled"
+title: "Showcasing a Machine Learning Model"
 description: |
-  A new article created using the Distill format.
-author:
-  - name: Nora Jones 
-    url: https://example.com/norajones
-    affiliation: Spacely Sprockets
-    affiliation_url: https://example.com/spacelysprokets
-date: "`r Sys.Date()`"
+  Explore this page to see how I used a machine learning model to predict the pH of the Ross Barnett Reservoir. You may click "Show code" on any of the elements to see their source.
 output: distill::distill_article
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+```{r DocumentSetUp, echo=FALSE}
+library(tidyverse)
+library(caret)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web. 
+```{r 1.organizing, echo=FALSE}
+FinalProjectData<-FinalProjectData_Clean%>%
+  select(pH,MonitoringLocationDescriptionText,Month,Year,Hour)
 
-Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+FinalProjectData[FinalProjectData == "NEAR DAM"] <- "Dam"
+
+FinalProjectData[FinalProjectData == "NR CANTON OFF HWY 43"] <- "Canton"
+
+FinalProjectData[FinalProjectData == "NEAR FANNIN JUST OFF PELAHATCHIE RECREATION AREA"] <- "Fannin"
+
+FinalProjectData[FinalProjectData == "NEAR SAND HILL MID-LAKE BELOW HWY 43 4 MILES WEST OF GOSHEN SPRINGS"] <- "Sand Hill"
+```
+
+# Data Background
+
+In this project, I am using data from the [National Water Quality Monitoring Counsel.](waterqualitydata.us) The records I choose to include were all samples in the Ross Barnett Reservoir from 4 different areas in the years 2016-2020. I am using the following variables to predict pH:
+- monitoring location (4 different values)
+- hour (24 different values)
+- year (4 different values)
+
+Below is a table of the base dataset I will be using.
+
+```{r 1.Full Data, code_folding=TRUE}
+knitr::kable(FinalProjectData_Clean)%>%
+  kableExtra::kable_styling("striped")%>%
+  kableExtra::scroll_box(width = "100%",height="300px")
+```
+
+# Understanding the Data
+tie actual into model below later
+do these charts w findings; compare
+
+## High-level pH statistics:
+
+```{r 2.summarystats, code_folding=TRUE}
+summary(FinalProjectData$pH)
+
+psych::describe(FinalProjectData$pH)
+```
+
+## Vizualize 
+
+Some locations, like Canton, seem to have pH values all over the place - while others, like Fannin, seem to have pH values that are mostly close to each other. 
+
+```{r 2.boxplot.locations, code_folding=TRUE}
+ggplot(data=FinalProjectData,mapping = aes(x=MonitoringLocationDescriptionText,y=pH))+geom_boxplot()
+```
+
+Some years, like 2017 and 2018, seem to have pH values all over the place - while others, like 2020, seem to have pH values that are mostly close to each other. 
+
+```{r 2.boxplot.years, code_folding=TRUE}
+ggplot(data=FinalProjectData,mapping = aes(group=Year,x=Year,y=pH))+geom_boxplot()
+```
+
+## Recap
+
+Based on the summary statistics and plots above, it is clear that pH values are skewed and there are some outliers.
+
+# Neural Networks -- cite!!
+
+The Neural Networks machine learning model gets it's name from the highly complex, rapid-processing system of the human network system. Neural networks is useful in complex datasets, as it is adaptive and processes parallel information instead of only  linear. Neural networks process information in layers - starting with raw input, then hidden layers where it learns and trains from the inputs, and then the output layer where we see the prediction. 
+
+# Predicting pH with Neural Networks 4. Split data, run model, and find the results
+
+## Splitting the data
+
+```{r 4.split, code_folding=TRUE}
+set.seed(1)
+#lets split the data 60/40
+trainIndex <- createDataPartition(FinalProjectData_Clean$pH, p = .6, list = FALSE, times = 1)
+
+#grab the data
+waterTrain <- FinalProjectData_Clean[ trainIndex,]
+waterTest  <- FinalProjectData_Clean[-trainIndex,]
+```
+
+## Running the model
+
+```{r 4.runmodel, code_folding=TRUE, warning=FALSE}
+waterNNET<- train(
+  form = pH ~ MonitoringLocationDescriptionText+Month+Year+Hour,
+  data = na.omit(waterTrain),
+  trControl = trainControl(method = "cv", number = 10),
+  method = "nnet",
+  preProcess = c("center", "scale"),
+  tuneLength = 5,
+  trace=FALSE,
+  linout=T)
+```
+
+## Predict 
+
+```{r 4.predict, code_folding=TRUE}
+#waterNNET
+knitr::kable(waterNNET$bestTune)
+
+plot(waterNNET)
 
 
+waterNNET_Pred<-predict(waterNNET,waterTest, type="raw")
 
+knitr::kable(waterNNET_Pred)%>%
+  kableExtra::kable_styling("striped")%>%
+  kableExtra::scroll_box(width = "50%",height="300px")
 
+waterNNETtestpred<-cbind(waterNNET_Pred,waterTest)
+```
 
+## Results
+
+Root Mean Squared Error
+```{r 4.results.RMSE, code_folding=TRUE}
+RMSE(waterNNETtestpred$waterNNET_Pred,waterNNETtestpred$pH)
+```
+
+R-Squared
+```{r 4.results.RSquared, code_folding=TRUE}
+cor(waterNNETtestpred$waterNNET_Pred,waterNNETtestpred$pH)^2
+```
+
+## Visualize
+
+Results Plot
+
+```{r 4.resultsplot, code_folding=TRUE}
+pH_Scale <- colorRampPalette(c("springgreen2", "springgreen3", "aquamarine4"))
+
+pd <- pdp::partial(waterNNET, pred.var = c("Year","Hour"))
+
+pdp::plotPartial(pd)
+```
+
+Results Plot with Contour
+
+```{r 4.resultsplotcontour, code_folding=TRUE}
+pdp::plotPartial(pd, contour = TRUE, col.regions = pH_Scale)
+```
+
+3-D Surface Plot
+
+```{r 4.3D, code_folding=TRUE}
+# 3-D surface
+#pdp::plotPartial(pd, levelplot = FALSE, zlab = "pH", colorkey = TRUE, 
+              #      screen = list(z = -20, x = -60))
+```
+
+3-D Surface Plot Interpolate
+
+```{r 4.3dinterpolate, code_folding=TRUE}
+# <- akima::interp(x = pd$Year, y = pd$Hour, z = pd$yhat)
+
+#p3 <- plotly::plot_ly(x = dens$x, 
+ #         y = dens$y, 
+  #        z = dens$z,
+   #       colors = c("springgreen2", "springgreen3", "aquamarine4"),
+    #      type = "surface")
+
+#p3 <- p3%>% plotly::layout(scene = list(xaxis = list(title = 'Year'),
+                 #    yaxis = list(title = 'Hour'),
+                #     zaxis = list(title = 'Predicteed pH')))
+#p3
+```
+
+# What The Results Mean
+
+Looking at the results, and considering the information about R-Squared [here](alexxreadd.com/RSquared), we are able to see an error rate of about 59%; meaning, we have an accuracy of around 41%. While 41% accuracy is not typically desirable, it is pretty impressive that a machine learning model can take the skewed data and have the accuracy it does when predicting pH based off the location, hour, and year water was sampled in a 200-acre body of water that a river constantly flows through.
+
+The value to be gained from this model and others like it are limitless. For instance, a researcher might spend time collecting samples in a highly-polluted body of water in a third-world country, where the body of water is the local resident's only drinking source. The researcher then can run the neural networks model, or various others, and obtain predictions that can be critical to the resident's health if it determined that certain chemicals in the water are at unsafe levels only in the peak of the morning or similar.
+
+In accounting, the value is also limitless. Models can be used to more accurately determine estimates for accounts like Warranty Liability, Return Merchandise, Allowance for Doubtful Accounts, and much more. Models can even be used to [once you 2nd paper is published I'll write the title of it here and link the journal]

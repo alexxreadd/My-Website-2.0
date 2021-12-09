@@ -1,13 +1,5 @@
 ---
 title: "Résumé"
-description: |
-  Alex Read's Resume
-author:
-  - name: Alex Read 
-    url: https://example.com/norajones
-    affiliation: Spacely Sprockets
-    affiliation_url: https://example.com/spacelysprokets
-date: "`r Sys.Date()`"
 output: distill::distill_article
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "R-Squared Is Bad..."
 description: |
-  A new article created using the Distill format.
+  R Squard is bad or R squared isnt as good as it seems, something like that; fix spelling mistake in first squared
 author:
   - name: Nora Jones 
     url: https://example.com/norajones

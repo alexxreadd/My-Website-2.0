@@ -1,16 +1,20 @@
 name: ". name yml"
-title: "Alex Read Title"
-description: |
-  this is description on site yml
+title: "Alex Read"
 output_dir: "docs"
 navbar:
   right:
     - text: "Home"
       href: AlexRead.html
-    - text: "Resume"
-      href: Website_Resume_11092021.html
+    - text: "Résumé"
+      href: Résumé.html
     - text: "Projects"              
       menu:
-      - text: "R-Squared Is Bad..."
-      - href: RSquared.html
-output: distill::distill_article
+      - text: "R-Squared"
+        href: RSquared.html
+      - text: "Support Vector Machine"
+        href: SupportVectorMachine.html
+      - text: "ACC 8053 - Final Project"
+        href: FinalProject.html
+output: 
+  distill::distill_article:
+    toc_float: true

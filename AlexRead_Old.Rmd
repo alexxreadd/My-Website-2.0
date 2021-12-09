@@ -1,0 +1,13 @@
+---
+title: "Alex Read"
+image: "AlexRead.jpg"
+links:
+  - label: LinkedIn
+    url: "www.linkedin.com/in/alexxreadd"
+  - label: Email
+    url: "mailto:alexxreadd@me.com"
+output:
+  postcards::jolla
+---
+ 
+I am a student at Mississippi State University with a Bachelor's in Accounting and am currently studying Masters of Accountancy, with a minor in Data Analytics.
