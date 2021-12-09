@@ -72,7 +72,7 @@ Based on the summary statistics and plots above, it is clear that pH values are 
 
 The Neural Networks machine learning model gets it's name from the highly complex, rapid-processing system of the human network system. Neural networks is useful in complex datasets, as it is adaptive and processes parallel information instead of only  linear. Neural networks process information in layers - starting with raw input, then hidden layers where it learns and trains from the inputs, and then the output layer where we see the prediction. 
 
-# Predicting pH with Neural Networks 4. Split data, run model, and find the results
+# Predicting pH with Neural Networks
 
 ## Splitting the data
 
@@ -121,11 +121,13 @@ waterNNETtestpred<-cbind(waterNNET_Pred,waterTest)
 ## Results
 
 Root Mean Squared Error
+
 ```{r 4.results.RMSE, code_folding=TRUE}
 RMSE(waterNNETtestpred$waterNNET_Pred,waterNNETtestpred$pH)
 ```
 
 R-Squared
+
 ```{r 4.results.RSquared, code_folding=TRUE}
 cor(waterNNETtestpred$waterNNET_Pred,waterNNETtestpred$pH)^2
 ```
