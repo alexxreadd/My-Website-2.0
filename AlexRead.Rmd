@@ -8,7 +8,7 @@ links:
     url: "mailto:alexxreadd@me.com"
 output:
   postcards::jolla
-site: distill::distill_article
+site: distill::distill_website
 ---
  
 I am a student at Mississippi State University with a Bachelor's in Accounting and am currently studying Masters of Accountancy, with a minor in Data Analytics.
